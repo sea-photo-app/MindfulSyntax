@@ -57,7 +57,6 @@ export function loginView() {
       <form class="settings-form auth-form" data-auth-login novalidate>
         <label>Email<input type="email" name="email" autocomplete="email" placeholder="you@example.ru" required></label>
         <label>Пароль<input type="password" name="password" autocomplete="current-password" placeholder="Пароль" required></label>
-        <a class="auth-forgot" href="#/reset">Забыли пароль?</a>
         <p class="settings-error" data-auth-error role="alert"></p>
         <button class="btn btn--primary" type="submit">Войти</button>
       </form>`,
