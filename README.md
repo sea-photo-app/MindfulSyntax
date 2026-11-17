@@ -255,20 +255,6 @@ node tools/validate-content.mjs
 
 ---
 
-## Сервер
-
-Инструкция: [SUPABASE_SETUP.md](./SUPABASE_SETUP.md). SQL-схема: `supabase/schema.sql`.
-Для быстрого старта используется Supabase Free; для 152-ФЗ в дальнейшем нужен
-российский VPS/Postgres (Yandex Cloud, Timeweb, Beget).
-
-## Архив версий
-
-Старые версии вынесены в `../versions/`:
-
-- `v1` — ранняя версия, полный исходник не сохранился;
-- `v2` — артефакты версии Claude Code, старые 3D-модели и `hero-final.blend`;
-- `v3` — рабочая копия текущей версии.
-
 ## Лицензии
 
 Код сайта — MIT. Сторонние компоненты: Pyodide (MPL-2.0), Three.js (MIT),
