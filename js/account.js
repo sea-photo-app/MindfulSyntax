@@ -177,6 +177,7 @@ export async function initAccount() {
       try {
         await hydrateServer(session);
         if (recovered) window.location.hash = "#/reset";
+        else if (auth?.type === "signup" || auth?.type === "email") window.location.hash = "#/confirmed";
         else if (auth) window.location.hash = "#/account";
       } catch (error) {
         console.warn("Серверная сессия не восстановлена", error);
@@ -203,7 +204,7 @@ export async function registerAccount({ email, password, consent }) {
 
   if (serverEnabled) {
     try {
-      const redirectTo = `${location.origin}${location.pathname}#/account`;
+      const redirectTo = `${location.origin}${location.pathname}`;
       const data = await sb.signUp({ email: normalized, password: String(password), redirectTo });
       if (data?.access_token) {
         const session = sb.saveAuthSession(data);
@@ -300,7 +301,7 @@ export async function deleteAccount() {
 export async function requestPasswordReset(email) {
   if (!serverEnabled) return { ok: false, error: "Сброс пароля доступен только при настроенном сервере." };
   try {
-    await sb.recover(normalizeEmail(email), `${location.origin}${location.pathname}#/reset`);
+    await sb.recover(normalizeEmail(email), `${location.origin}${location.pathname}`);
     return { ok: true };
   } catch (error) {
     return { ok: false, error: error.message || "Не удалось отправить письмо." };

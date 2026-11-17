@@ -29,6 +29,7 @@ import { initCheatsheet, renderCheatsheet } from "./views/cheatsheet.js";
 import { settingsView, mountSettings } from "./views/settings.js";
 import { privacyView } from "./views/privacy.js";
 import { resetView } from "./views/reset.js";
+import { confirmedView } from "./views/confirmed.js";
 import { accountView } from "./views/account.js";
 import { initAccount, currentAccount, subscribeAccount, logoutAccount } from "./account.js";
 import { loginView, registerView } from "./views/auth.js";
@@ -185,6 +186,7 @@ const TITLES = {
   login: "Вход — MindfulSyntax",
   register: "Регистрация — MindfulSyntax",
   reset: "Сброс пароля — MindfulSyntax",
+  confirmed: "Почта подтверждена — MindfulSyntax",
   logout: "Выход — MindfulSyntax",
   account: "Аккаунт — MindfulSyntax",
 };
@@ -218,6 +220,7 @@ function resolveRoute() {
   if (parts[0] === "login") return { view: loginView, key: "login", title: TITLES.login };
   if (parts[0] === "register") return { view: registerView, key: "register", title: TITLES.register };
   if (parts[0] === "reset") return { view: resetView, key: "reset", title: TITLES.reset };
+  if (parts[0] === "confirmed") return { view: confirmedView, key: "confirmed", title: TITLES.confirmed };
   if (parts[0] === "logout") return {
     view: () => ({
       html: '<div class="container section"><div class="card"><h1>Выходим…</h1><p>Аккаунт отключён на этом устройстве.</p></div></div>',

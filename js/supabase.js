@@ -151,8 +151,13 @@ export function oauthUrl(provider = "discord", redirectTo = "") {
 
 /** Supabase кладёт токены в hash после OAuth/подтверждения/recovery. */
 export function consumeAuthHash() {
-  if (!location.hash || !location.hash.includes("access_token=")) return null;
-  const params = new URLSearchParams(location.hash.slice(1));
+  if (!location.hash) return null;
+  // Supabase иногда добавляет токены после уже существующего hash:
+  // #/account#access_token=... — берём часть начиная с access_token.
+  const raw = location.hash;
+  const marker = raw.indexOf("access_token=");
+  if (marker < 0) return null;
+  const params = new URLSearchParams(raw.slice(marker));
   const access = params.get("access_token");
   if (!access) return null;
   const payload = {
@@ -164,7 +169,7 @@ export function consumeAuthHash() {
     user: null,
   };
   saveAuthSession(payload);
-  // Убираем токены из адресной строки.
-  history.replaceState(null, "", `${location.pathname}${location.search}${location.hash.includes("#/") ? "#/" : ""}`);
+  // Убираем токены из адресной строки; маршрут восстановит initAccount.
+  history.replaceState(null, "", `${location.pathname}${location.search}`);
   return payload;
 }

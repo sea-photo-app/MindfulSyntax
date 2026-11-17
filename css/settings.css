@@ -622,3 +622,34 @@
 .auth-oauth__btn {
   width: 100%;
 }
+
+.confirmed-card {
+  text-align: center;
+  align-items: center;
+}
+
+.confirmed-card__mark {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  border: 1px solid color-mix(in srgb, var(--moss) 38%, transparent);
+  border-radius: 50%;
+  color: var(--moss);
+  background: color-mix(in srgb, var(--moss) 10%, transparent);
+}
+
+.confirmed-card__mark svg {
+  width: 28px;
+  height: 28px;
+}
+
+.confirmed-card h1 {
+  margin-bottom: 12px;
+}
+
+.confirmed-card__actions {
+  justify-content: center;
+  margin-top: 24px;
+}
