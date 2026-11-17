@@ -3096,6 +3096,11 @@ html.theme-changing[data-route="map"] .site-main {
 
 /* Compact map: make the night variant clearly different from the old brown paper. */
 [data-theme="night"] .mini-map.map-canvas {
+  --map-paper: #101b18;
+  --map-ink: #d7e6d6;
+  --map-ink-soft: #a8c1af;
+  --map-vermilion: #d6a36a;
+  --map-moss: #8bb49a;
   border-color: rgba(176, 202, 174, 0.2);
   background: #101b18;
 }
