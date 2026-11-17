@@ -17,7 +17,7 @@ import { initAchievements } from "./achievements.js";
 import { setSoundEnabled, playTick } from "./audio.js";
 import { icon, toast, setupReveal, openDrawer, closeDrawers, isDrawerOpen } from "./ui.js";
 import { homeView } from "./views/home.js";
-import { moduleView } from "./views/module.js";
+import { moduleView } from "./views/module.js?v=20261117b";
 import { lessonView } from "./views/lesson.js";
 import { mapView } from "./views/map.js";
 import { playgroundView } from "./views/playground.js";
