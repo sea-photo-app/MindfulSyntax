@@ -128,7 +128,7 @@ export function mountSettings(root) {
       toast({ title: "Вы вышли из аккаунта", text: "Уроки снова откроются после входа.", iconName: "leaf" });
     });
     const deleteButton = card.querySelector("[data-delete-account]");
-    deleteButton?.addEventListener("click", () => {
+    deleteButton?.addEventListener("click", async () => {
       if (deleteButton.dataset.armed !== "1") {
         deleteButton.dataset.armed = "1";
         deleteButton.textContent = "Нажмите ещё раз";
@@ -139,8 +139,16 @@ export function mountSettings(root) {
         }, 5000);
         return;
       }
-      deleteAccount();
-      toast({ title: "Аккаунт и данные удалены", text: "Локальные данные очищены.", iconName: "reset" });
+      deleteButton.disabled = true;
+      const result = await deleteAccount();
+      deleteButton.disabled = false;
+      if (!result.ok) {
+        toast({ title: "Не удалось удалить аккаунт", text: result.error, iconName: "alert" });
+        deleteButton.dataset.armed = "";
+        deleteButton.textContent = "Удалить аккаунт";
+        return;
+      }
+      toast({ title: "Аккаунт и данные удалены", text: "Сессия завершена.", iconName: "reset" });
     });
   };
 

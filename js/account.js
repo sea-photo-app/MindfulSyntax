@@ -277,8 +277,11 @@ export async function logoutAccount() {
 export async function deleteAccount() {
   if (serverEnabled) {
     const session = sb.readSession();
-    if (session?.access_token) {
-      try { await sb.deleteUser(session.access_token); } catch (error) { console.warn("Не удалось удалить пользователя", error); }
+    if (!session?.access_token) return { ok: false, error: "Нет активной сессии." };
+    try {
+      await sb.deleteUser(session.access_token);
+    } catch (error) {
+      return { ok: false, error: humanAuthError(error.message) };
     }
     sb.clearSession();
     serverAccount = null;
@@ -291,6 +294,7 @@ export async function deleteAccount() {
   }
   resetProgress();
   notify();
+  return { ok: true };
 }
 
 export async function requestPasswordReset(email) {
