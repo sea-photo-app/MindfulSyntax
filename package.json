@@ -1,0 +1,11 @@
+{
+  "name": "garden-of-code",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Сад кода — интерактивный курс Python для новичков в эстетике японского сада",
+  "license": "MIT",
+  "scripts": {
+    "start": "python3 -m http.server 4173"
+  }
+}

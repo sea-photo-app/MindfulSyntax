@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ru" data-theme="day">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MindfulSyntax — спокойный интерактивный курс Python в эстетике вечернего японского сада. Теория простыми словами, песочница в браузере и мини-игры.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f0e6ef">
+  <title>MindfulSyntax — Python в тихом саду</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/fonts/fonts.css">
+  <link rel="stylesheet" href="./css/tokens.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/lessons.css">
+  <link rel="stylesheet" href="./css/games.css">
+  <link rel="stylesheet" href="./css/views.css">
+  <link rel="stylesheet" href="./css/library.css">
+  <link rel="stylesheet" href="./css/hero.css">
+  <link rel="stylesheet" href="./css/map.css">
+  <link rel="stylesheet" href="./css/settings.css">
+  <script>
+    // Тема до первой отрисовки, чтобы не было вспышки светлого экрана.
+    (function () {
+      try {
+        var raw = localStorage.getItem("garden-of-code:v1");
+        var saved = raw ? JSON.parse(raw) : null;
+        var theme = (saved && saved.theme) ||
+          (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "day");
+        document.documentElement.dataset.theme = theme;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <div class="theme-transition" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
+  <svg class="svg-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M20 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3.5s6 6.4 6 10.5a6 6 0 0 1-12 0c0-4.1 6-10.5 6-10.5z"/></symbol>
+    <symbol id="i-bamboo" viewBox="0 0 24 24"><path d="M9 21V3M15 21V7M9 7h6M9 12h6M9 17h6"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4l6 2 6-2v16l-6 2-6-2-6 2V6zM9 4v14M15 6v14"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 5l-2 14"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5zM4 5.5v16"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+    <symbol id="i-sound-on" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9zM16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></symbol>
+    <symbol id="i-sound-off" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9zM17 9l4 6M21 9l-4 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4v1a4 4 0 0 0 4 4M16 6h4v1a4 4 0 0 1-4 4M12 13v5M8 21h8M9 18h6"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l9 17H3zM12 9v5M12 17.5v.5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 2 8M4 4v6h6"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M8 14a5.5 5.5 0 1 1 8 0c-1 1-1.3 2-1.3 3H9.3c0-1-.3-2-1.3-3z"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7M6 10v10h12V10"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 9 12 4 20 4c0 8-5 15-15 15zM5 19c2-4 5-7 9-9"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20.5c.8-3.7 3.6-5.5 7.5-5.5s6.7 1.8 7.5 5.5"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+  </svg>
+
+  <header class="site-header" id="site-header">
+    <div class="site-header__inner container">
+      <a class="brand" href="#/" aria-label="MindfulSyntax — на главную">
+        <span class="brand__stamp" aria-hidden="true">py</span>
+        <span class="brand__text"><strong>MindfulSyntax<sup>®</sup></strong><small>Python в тихом саду</small></span>
+      </a>
+
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="#/" data-nav="home">Сад</a>
+        <a href="#/map" data-nav="map">Карта</a>
+        <a href="#/practice" data-nav="practice">Тренажёр</a>
+        <a href="#/library" data-nav="library">Библиотека</a>
+        <a href="#/playground" data-nav="playground">Песочница</a>
+        <a href="#/journal" data-nav="journal">Дневник</a>
+        <button class="nav__link" type="button" data-action="open-cheatsheet">Шпаргалка</button>
+      </nav>
+
+      <div class="header-actions">
+        <a class="level-pill" href="#/map" aria-label="Уровень воды в саду: прогресс курса">
+          <svg class="icon icon--drop" aria-hidden="true"><use href="#i-drop"/></svg>
+          <span class="level-pill__value" data-progress-label>0%</span>
+          <span class="level-pill__bar" aria-hidden="true"><i data-progress-fill></i></span>
+        </a>
+        <button class="icon-btn" type="button" data-action="toggle-theme" aria-label="Включить ночной режим" aria-pressed="false" title="День / ночь">
+          <svg class="icon" data-theme-icon aria-hidden="true"><use href="#i-moon"/></svg>
+        </button>
+        <button class="icon-btn" type="button" data-action="toggle-sound" aria-label="Включить звук" aria-pressed="false" title="Звук сада">
+          <svg class="icon" data-sound-icon aria-hidden="true"><use href="#i-sound-off"/></svg>
+        </button>
+        <a class="icon-btn" href="#/settings" data-nav="settings" aria-label="Настройки" title="Настройки">
+          <svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg>
+        </a>
+        <a class="icon-btn account-link" href="#/login" data-account-link aria-label="Войти в аккаунт" title="Войти в аккаунт">
+          <svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>
+        </a>
+        <button class="icon-btn nav-toggle" type="button" data-action="toggle-nav" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Мобильная навигация" hidden>
+      <a href="#/" data-nav="home"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>Сад</a>
+      <a href="#/map" data-nav="map"><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg>Карта сада</a>
+      <a href="#/practice" data-nav="practice"><svg class="icon" aria-hidden="true"><use href="#i-target"/></svg>Тренажёр</a>
+      <a href="#/library" data-nav="library"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Библиотека</a>
+      <a href="#/playground" data-nav="playground"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>Песочница</a>
+      <a href="#/journal" data-nav="journal"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Дневник ошибок</a>
+      <button type="button" class="mobile-nav__link" data-action="open-cheatsheet"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Шпаргалка</button>
+      <a href="#/challenge" data-nav="challenge"><svg class="icon" aria-hidden="true"><use href="#i-trophy"/></svg>Финальный челлендж</a>
+      <a href="#/login" data-account-mobile><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>Войти</a>
+      <a href="#/settings" data-nav="settings"><svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg>Настройки</a>
+    </nav>
+  </header>
+
+  <main id="main" class="site-main" tabindex="-1">
+    <noscript>
+      <div class="container section">
+        <div class="card">
+          <h1>Для сада нужен JavaScript</h1>
+          <p>Курс — интерактивный: песочница Python, игры и 3D-сад работают на JavaScript. Включите его в настройках браузера и обновите страницу.</p>
+        </div>
+      </div>
+    </noscript>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__brand">
+        <span class="brand__stamp brand__stamp--small" aria-hidden="true">py</span>
+        <div>
+          <strong>MindfulSyntax<sup>®</sup></strong>
+          <p>Python в тихом саду.</p>
+        </div>
+      </div>
+      <nav class="site-footer__nav" aria-label="Навигация в подвале">
+        <a href="#/">Главная</a>
+        <a href="#/map">Карта сада</a>
+        <a href="#/practice">Тренажёр</a>
+        <a href="#/library">Библиотека</a>
+        <a href="#/playground">Песочница</a>
+        <a href="#/challenge">Челлендж</a>
+      </nav>
+      <p class="site-footer__note">Python в браузере работает на Pyodide. Прогресс хранится только у вас в браузере.</p>
+    </div>
+  </footer>
+
+  <div class="drawer-backdrop" data-action="close-drawers" hidden></div>
+
+  <aside class="drawer" id="cheatsheet-drawer" role="dialog" aria-modal="true" aria-labelledby="cheatsheet-title" aria-hidden="true">
+    <div class="drawer__head">
+      <div>
+        <span class="kicker">Всё, что уже изучили</span>
+        <h2 id="cheatsheet-title">Шпаргалка</h2>
+      </div>
+      <button class="icon-btn" type="button" data-action="close-drawers" aria-label="Закрыть шпаргалку">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+    <label class="search-field">
+      <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+      <input type="search" id="cheatsheet-search" placeholder="Найти команду: print, if, список…" autocomplete="off">
+    </label>
+    <div class="drawer__body" id="cheatsheet-content"></div>
+  </aside>
+
+  <div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      function bootError(message) {
+        if (window.__mindfulSettled) return;
+        const main = document.getElementById("main");
+        if (!main) return;
+        const safe = String(message || "Неизвестная ошибка").replace(/[<>&]/g, "");
+        try { (new Image()).src = "/__boot_error?m=" + encodeURIComponent(safe.slice(0, 500)); } catch (e) {}
+        main.innerHTML = '<div class="container section"><div class="card boot-error"><h1>Сад не загрузился</h1><p>Обновите страницу или откройте её в другом браузере. Ниже — техническая причина.</p><pre>' + safe + '</pre></div></div>';
+      }
+      window.__mindfulBootError = bootError;
+      window.addEventListener("error", function (event) {
+        bootError(event.message || (event.target && event.target.src) || "Ошибка загрузки скрипта");
+      }, true);
+      window.addEventListener("unhandledrejection", function (event) {
+        bootError(event.reason && (event.reason.message || event.reason));
+      });
+      window.setTimeout(function () {
+        if (!window.__mindfulSettled) bootError("Скрипт не запустился за 4 секунды");
+      }, 4000);
+    })();
+  </script>
+  <script>
+    // Жёсткая защита до загрузки app.js: работает даже если модуль закэширован.
+    (function () {
+      function authGuard() {
+        if (!/^#\/(lesson|module)\//.test(location.hash)) return;
+        let session = "";
+        let valid = false;
+        try {
+          session = localStorage.getItem("mindfulsyntax:session:v1") || "";
+          const serverSession = localStorage.getItem("mindfulsyntax:supabase-session:v1") || "";
+          if (serverSession) valid = true;
+          if (session) {
+            const store = JSON.parse(localStorage.getItem("mindfulsyntax:accounts:v1") || "{}");
+            valid = Array.isArray(store.accounts) && store.accounts.some((account) => account.id === session);
+          }
+        } catch (e) {}
+        if (valid) return;
+        try {
+          localStorage.removeItem("mindfulsyntax:session:v1");
+          sessionStorage.setItem("mindfulsyntax:auth-next", location.hash);
+        } catch (e) {}
+        if (location.hash !== "#/login") location.hash = "#/login";
+      }
+      window.addEventListener("hashchange", authGuard);
+      authGuard();
+    })();
+  </script>
+  <script type="module" src="./js/app.js?v=20261117-server2"></script>
+</body>
+</html>

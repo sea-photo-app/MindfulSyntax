@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      "**/.*",
+      "**/node_modules/**",
+      "versions/**",
+      "assets/blender/**",
+      "assets/models/**",
+      "supabase/**",
+      "*.md",
+      "assets/preview-*.png",
+      "assets/hero-*.png"
+    ],
+    "rewrites": []
+  }
+}

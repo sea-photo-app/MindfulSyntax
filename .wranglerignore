@@ -1,0 +1,13 @@
+.git
+.gitignore
+node_modules
+.DS_Store
+versions
+assets/blender
+assets/models
+*.blend
+*.blend1
+supabase
+*.md
+assets/preview-*.png
+assets/hero-*.png

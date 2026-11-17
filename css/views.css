@@ -1,0 +1,941 @@
+/* ==========================================================================
+   Страницы: главная, модуль, карта, челлендж
+   ========================================================================== */
+
+.site-main:focus {
+  outline: none;
+}
+
+.section-heading {
+  max-width: 720px;
+  margin-bottom: clamp(22px, 3vw, 34px);
+}
+
+.section-heading h2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.section-heading p {
+  color: var(--ink-soft);
+  max-width: 62ch;
+}
+
+.section-heading__row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.section-heading__row h2 {
+  margin-top: 8px;
+}
+
+.hero__next {
+  margin-top: 18px;
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+}
+
+/* --- Карточки возможностей --------------------------------------------- */
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 28px;
+}
+
+.feature {
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+
+.feature__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  background: var(--bamboo-soft);
+  color: var(--bamboo-deep);
+}
+
+.feature__icon .icon {
+  width: 19px;
+  height: 19px;
+}
+
+.feature h3 {
+  font-size: 1.06rem;
+  margin-bottom: 6px;
+}
+
+.feature p {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .feature-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Карта в домашнем блоке -------------------------------------------- */
+
+.map-teaser {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  padding: clamp(22px, 3vw, 34px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(100% 120% at 100% 0%, color-mix(in srgb, var(--water) 12%, transparent), transparent 60%),
+    var(--card);
+}
+
+.map-teaser h2 {
+  margin-block: 8px 10px;
+}
+
+.map-teaser p {
+  color: var(--ink-soft);
+}
+
+.map-teaser__map {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  background: var(--paper-2);
+}
+
+.map-teaser__map svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 820px) {
+  .map-teaser {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- SVG-карта ---------------------------------------------------------- */
+
+.map-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.map-path {
+  stroke: color-mix(in srgb, var(--stone) 65%, transparent);
+  opacity: 0.65;
+}
+
+.map-path-line {
+  stroke: var(--card);
+  opacity: 0.75;
+}
+
+.zone-fill {
+  fill: color-mix(in srgb, var(--paper-3) 82%, var(--card));
+  stroke: var(--line-strong);
+  stroke-width: 1.1;
+  transition: fill 0.5s var(--ease), stroke 0.3s;
+}
+
+.map-zone:hover .zone-fill {
+  fill: color-mix(in srgb, var(--bamboo) 24%, var(--paper));
+}
+
+.map-zone.is-done .zone-fill {
+  fill: color-mix(in srgb, var(--bamboo) 42%, var(--paper));
+  stroke: color-mix(in srgb, var(--bamboo-deep) 55%, transparent);
+}
+
+.map-zone.is-done:hover .zone-fill {
+  fill: color-mix(in srgb, var(--bamboo) 52%, var(--paper));
+}
+
+.zone-water {
+  stroke: var(--water-deep);
+  opacity: 0.55;
+}
+
+.zone-stone {
+  fill: color-mix(in srgb, var(--stone) 70%, var(--paper));
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.zone-stem {
+  stroke: var(--bamboo-deep);
+  opacity: 0.72;
+}
+
+.zone-line {
+  stroke: var(--ink-soft);
+  opacity: 0.4;
+  fill: none;
+}
+
+.map-zone text {
+  font-size: 14px;
+  transition: fill 0.3s;
+}
+
+.map-zone .zone-num {
+  font-size: 16px;
+}
+
+.map-zone .zone-sub {
+  font-size: 10.5px;
+}
+
+.map-zone.is-done text {
+  fill: var(--bamboo-deep);
+}
+
+.map-zone.is-done .zone-sub {
+  fill: color-mix(in srgb, var(--bamboo-deep) 75%, var(--ink));
+}
+
+.map-zone:focus {
+  outline: none;
+}
+
+.map-zone:focus-visible .zone-fill {
+  stroke: var(--amber);
+  stroke-width: 3;
+}
+
+@media (max-width: 600px) {
+  .map-legend {
+    padding: 14px;
+  }
+}
+
+/* --- Страница модуля ---------------------------------------------------- */
+
+.module-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 210px;
+  gap: clamp(24px, 4vw, 50px);
+  align-items: center;
+}
+
+.module-hero h1 {
+  margin-block: 10px 14px;
+}
+
+.module-hero .lead {
+  max-width: 62ch;
+}
+
+.module-stamp {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 200px;
+  height: 200px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--bamboo) 16%, transparent), transparent 65%),
+    color-mix(in srgb, var(--card) 65%, transparent);
+  color: var(--bamboo-deep);
+  text-align: center;
+  transform: rotate(-2deg);
+}
+
+.module-stamp::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed var(--line);
+  border-radius: 50%;
+}
+
+.module-stamp__num {
+  font-family: var(--font-serif);
+  font-size: 2.7rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.module-stamp__zone {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  max-width: 130px;
+}
+
+.module-stamp__line {
+  width: 34px;
+  height: 1px;
+  background: var(--line-strong);
+  margin-block: 5px;
+}
+
+.module-stamp__note {
+  font-size: 0.68rem;
+  color: var(--muted);
+  max-width: 120px;
+}
+
+.module-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: clamp(24px, 4vw, 38px);
+  align-items: start;
+}
+
+.module-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: calc(var(--header-h) + 20px);
+}
+
+.mini-map {
+  margin: 14px 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--paper-2);
+}
+
+.mini-map svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.mini-map text {
+  display: none;
+}
+
+.module-lessons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.module-lesson {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 17px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.module-lesson:hover {
+  border-color: color-mix(in srgb, var(--bamboo) 50%, var(--line));
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.module-lesson__num {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--bamboo-deep);
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  flex: none;
+}
+
+.module-lesson__num .icon {
+  width: 17px;
+  height: 17px;
+}
+
+.module-lesson.is-done .module-lesson__num {
+  background: var(--bamboo);
+  border-color: var(--bamboo);
+  color: #fbf8f1;
+}
+
+.module-lesson__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.module-lesson__body strong {
+  font-size: 0.98rem;
+}
+
+.module-lesson__body span {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.module-lesson__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.module-lesson__meta .icon {
+  width: 15px;
+  height: 15px;
+}
+
+@media (max-width: 980px) {
+  .module-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .module-side {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+@media (max-width: 720px) {
+  .module-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .module-stamp {
+    display: none;
+  }
+
+  .module-lesson {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .module-lesson__meta {
+    grid-column: 2;
+    flex-wrap: wrap;
+  }
+
+  .module-side {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Челлендж ----------------------------------------------------------- */
+
+.challenge-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: clamp(24px, 4vw, 38px);
+  align-items: start;
+}
+
+.challenge-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: calc(var(--header-h) + 20px);
+}
+
+.challenge-success {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid color-mix(in srgb, var(--amber) 45%, var(--line));
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(90% 130% at 100% 0%, color-mix(in srgb, var(--amber) 18%, transparent), transparent 60%),
+    var(--success-soft);
+}
+
+.challenge-success__icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--amber-soft);
+  color: var(--amber-deep);
+  flex: none;
+}
+
+.challenge-success__icon .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.challenge-success h2 {
+  font-size: 1.45rem;
+  margin-bottom: 6px;
+}
+
+.challenge-success p {
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+}
+
+.criteria code {
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  font-size: 0.86em;
+}
+
+.challenge-steps .challenge-step:nth-child(1)::before {
+  background: var(--bamboo-soft);
+}
+
+.petal-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.petal {
+  position: absolute;
+  top: -24px;
+  width: 9px;
+  height: 13px;
+  border-radius: 60% 10% 60% 10%;
+  opacity: 0.85;
+  animation-name: petal-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(var(--drift, 40px), 105vh) rotate(540deg);
+    opacity: 0.15;
+  }
+}
+
+@media (max-width: 980px) {
+  .challenge-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .challenge-side {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .challenge-side {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Расстояния между блоками урока ------------------------------------ */
+
+.lesson-block-wrap + .lesson-block-wrap {
+  margin-top: 24px;
+}
+
+.lesson-block-wrap > .prose:first-child > :first-child {
+  margin-top: 0;
+}
+
+.lesson-block-wrap .widget,
+.lesson-block-wrap .sandbox,
+.lesson-block-wrap .task,
+.lesson-block-wrap .quiz {
+  margin-top: 0;
+}
+
+.lesson-blocks > .lesson-block-wrap:first-child {
+  margin-top: 0;
+}
+
+/* --- Дополнительные мелочи --------------------------------------------- */
+
+.hero__veil {
+  transform: translateY(calc(var(--hero-shift, 0px) * -0.12));
+}
+
+.hero__inner {
+  transform: translateY(calc(var(--hero-shift, 0px) * -0.04));
+}
+
+.achievements-panel {
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+@media (max-width: 720px) {
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__inner {
+    transform: none;
+  }
+}
+
+
+/* --- Карта на телефоне -------------------------------------------------- */
+
+.map-hint {
+  display: none;
+  margin-top: 8px;
+}
+
+.map-shell > * {
+  min-width: 0;
+}
+
+@media (max-width: 700px) {
+  .map-canvas {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  .map-canvas svg.map-svg--wide {
+    min-width: 680px;
+  }
+
+  .map-hint {
+    display: block;
+  }
+
+  .page-head .stat-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .page-head .stat {
+    padding: 12px 10px;
+  }
+
+  .page-head .stat__value {
+    font-size: 1.4rem;
+  }
+
+  .page-head .stat__label {
+    font-size: 0.7rem;
+  }
+}
+
+/* --- Карта: две раскладки (широкая и вертикальная для телефонов) ---------- */
+.map-svg--tall {
+  display: none;
+}
+
+.map-svg--wide .map-zone text {
+  font-size: 13px;
+}
+
+.map-svg--wide .map-zone .zone-sub {
+  font-size: 11px;
+}
+
+.map-svg--wide .map-zone .zone-num {
+  font-size: 16px;
+}
+
+.map-svg--tall .map-zone text {
+  font-size: 21px;
+}
+
+.map-svg--tall .map-zone .zone-sub {
+  font-size: 17px;
+}
+
+.map-svg--tall .map-zone .zone-num {
+  font-size: 25px;
+}
+
+@media (max-width: 720px) {
+  .map-svg--tall:not(.map-svg--compact) {
+    display: block;
+    max-width: 480px;
+    margin-inline: auto;
+  }
+
+  .map-svg--wide:not(.map-svg--compact) {
+    display: none;
+  }
+}
+
+/* Карта не наследует «иконочную» обводку svg: линии заданы своими классами. */
+.map-svg {
+  stroke: none;
+}
+
+/* Показываем ровно одну раскладку. Селекторы сильнее, чем
+   `.map-canvas svg` / `.map-teaser__map svg` / `.mini-map svg`,
+   иначе обе карты остаются в потоке и растягивают страницу. */
+svg.map-svg.map-svg--tall {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  svg.map-svg.map-svg--tall:not(.map-svg--compact) {
+    display: block;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  svg.map-svg.map-svg--wide:not(.map-svg--compact) {
+    display: none;
+  }
+
+  .map-canvas svg.map-svg--tall {
+    min-width: 0;
+  }
+}
+
+.map-svg text {
+  stroke: none;
+  paint-order: stroke;
+}
+
+/* --- Финальный проект: пять уровней ------------------------------------- */
+
+.project-progress {
+  margin-bottom: 18px;
+}
+
+.project-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.project-level {
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.project-level.is-done {
+  border-color: color-mix(in srgb, var(--success) 38%, var(--line));
+  background: color-mix(in srgb, var(--success-soft) 55%, var(--card));
+}
+
+.project-level__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.project-level__num {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--bamboo-deep);
+  background: var(--paper);
+}
+
+.project-level.is-done .project-level__num {
+  background: var(--bamboo);
+  border-color: var(--bamboo);
+  color: var(--paper);
+}
+
+.project-level__title {
+  flex: 1;
+  min-width: 0;
+}
+
+.project-level__title .kicker {
+  font-size: 0.66rem;
+}
+
+.project-level__title h3 {
+  margin-top: 2px;
+  font-size: 1.14rem;
+}
+
+.project-level__status {
+  flex: none;
+  white-space: nowrap;
+}
+
+.project-level > p {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.project-level__checks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.project-level__checks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.project-level__checks .icon {
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  flex: none;
+  color: var(--stone);
+}
+
+.project-level__checks li.is-ok {
+  color: var(--success);
+}
+
+.project-level__checks li.is-ok .icon {
+  color: var(--success);
+}
+
+.project-level__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+
+@media (max-width: 560px) {
+  .project-level {
+    padding: 16px;
+  }
+
+  .project-level__head {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .project-level__status {
+    order: 3;
+    margin-left: 56px;
+  }
+
+  .project-level__title h3 {
+    font-size: 1.05rem;
+  }
+
+  .project-level__foot {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* Новая карта-свиток на главной */
+.map-teaser__map--art {
+  padding: 0;
+  background: var(--paper-2);
+}
+
+.map-teaser__map--art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1.54;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+/* Light/dark map preview with a soft theme crossfade */
+.map-teaser__map--art {
+  position: relative;
+}
+
+.map-teaser__map--art .map-preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  transition: opacity 0.8s var(--ease);
+}
+
+.map-teaser__map--art .map-preview--light {
+  opacity: 1;
+}
+
+.map-teaser__map--art .map-preview--dark {
+  opacity: 0;
+}
+
+[data-theme="night"] .map-teaser__map--art .map-preview--light {
+  opacity: 0;
+}
+
+[data-theme="night"] .map-teaser__map--art .map-preview--dark {
+  opacity: 1;
+}
+
+.map-teaser__map--art {
+  aspect-ratio: 1.54;
+  overflow: hidden;
+}
