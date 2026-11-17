@@ -3069,3 +3069,27 @@ html.theme-changing[data-route="map"] .site-main {
 .map-compass::after {
   display: none;
 }
+
+
+/* Compact map in module/lesson sidebars: same theme variables as the full map,
+   but without the large paper frame and background texture. */
+.mini-map.map-canvas {
+  margin: 14px 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--paper-2);
+  box-shadow: none;
+  padding: 0;
+  overflow: hidden;
+}
+
+.mini-map.map-canvas::before,
+.mini-map.map-canvas::after {
+  display: none;
+}
+
+.mini-map.map-canvas .map-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}

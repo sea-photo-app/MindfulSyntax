@@ -3,11 +3,11 @@
  */
 export const LEGAL_OPERATOR = {
   status: "Физическое лицо",
-  name: "[УКАЖИТЕ ФИО]",
-  inn: "[ИНН ПРИ НАЛИЧИИ]",
+  name: "Зубков Кирилл Дмитриевич",
+  inn: "не указан",
   ogrn: "—",
-  address: "[УКАЖИТЕ АДРЕС ДЛЯ ОБРАЩЕНИЙ]",
-  email: "[УКАЖИТЕ EMAIL ДЛЯ ОБРАЩЕНИЙ]",
+  address: "по запросу",
+  email: "zubkovkirill2010@gmail.com",
 };
 
 export const POLICY_VERSION = "2026-11-17";

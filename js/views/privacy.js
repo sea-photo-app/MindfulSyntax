@@ -14,11 +14,11 @@ export function privacyView() {
     </div></header>
     <div class="container section legal-page">
       <article class="card legal-card">
-        <p class="legal-warning">Черновик: укажите ФИО, адрес и email оператора перед публикацией. Это не юридическая консультация.</p>
+        <p class="legal-warning">Оператор — физическое лицо. Адрес для обращений предоставляется по запросу; основные обращения — на email ниже.</p>
 
         <h2>1. Общие положения</h2>
         <p>Настоящая Политика описывает обработку персональных данных пользователей сайта MindfulSyntax (далее — Сайт) в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
-        <p>Оператор: ${OPERATOR.status} ${OPERATOR.name}. ИНН: ${OPERATOR.inn}. Адрес для обращений: ${OPERATOR.address}. Email: ${OPERATOR.email}.</p>
+        <p>Оператор: ${OPERATOR.status} ${OPERATOR.name}. Адрес для обращений: ${OPERATOR.address}. Email: ${OPERATOR.email}.</p>
 
         <h2>2. Какие данные обрабатываются</h2>
         <ul>

@@ -101,7 +101,7 @@ export function moduleView(module) {
             <span class="kicker">Зона сада</span>
             <h3 style="margin-top:6px">${escapeHtml(module.zone)}</h3>
             <p class="small muted" style="margin-top:6px">${escapeHtml(module.tagline)}</p>
-            <div class="mini-map">${gardenMapHTML(state.doneLessons, { compact: true })}</div>
+            <div class="mini-map map-canvas">${gardenMapHTML(state.doneLessons, { compact: true })}</div>
             <a class="btn btn--ghost btn--small" href="#/map" style="width:100%;margin-top:6px">${icon("map")} Вся карта</a>
           </div>
           <div class="card">
