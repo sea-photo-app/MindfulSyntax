@@ -183,15 +183,18 @@ export function mapView() {
         }
         const images = [];
         let stopped = false;
-        const load = (i) => new Promise((resolve) => {
+        let started = false;
+        let lastFrame = null;
+        const load = (i) => {
           const img = new Image();
-          img.onload = () => resolve(img);
-          img.onerror = () => resolve(null);
+          img.onload = () => { images[i] = img; };
+          img.onerror = () => { images[i] = null; };
           img.src = `./assets/table-props/${introFolder}/frame_${String(i + 1).padStart(4, "0")}.jpg`;
-          images[i] = img;
-        });
-        Promise.all(Array.from({ length: INTRO_FRAMES }, (_, i) => load(i))).then(() => {
-          if (stopped || !intro.isConnected) return;
+          return img;
+        };
+        const startIntro = () => {
+          if (started || stopped || !intro.isConnected) return;
+          started = true;
           const surface = intro.querySelector(".map-intro__canvas");
           const ctx = surface?.getContext("2d");
           if (!ctx) { intro.remove(); return; }
@@ -199,13 +202,19 @@ export function mapView() {
             surface.width = 720;
             surface.height = 1560;
           }
-          const started = performance.now();
+          const startedAt = performance.now();
           let raf = 0;
           const tick = (now) => {
             if (stopped) return;
-            const index = Math.min(INTRO_FRAMES - 1, Math.floor(((now - started) / 1000) * 24));
+            const index = Math.min(INTRO_FRAMES - 1, Math.floor(((now - startedAt) / 1000) * 24));
             const img = images[index];
-            if (img && img.complete && img.naturalWidth) ctx.drawImage(img, 0, 0, surface.width, surface.height);
+            if (img && img.complete && img.naturalWidth) {
+              ctx.drawImage(img, 0, 0, surface.width, surface.height);
+              lastFrame = img;
+            } else if (lastFrame) {
+              // Не ждём следующие кадры: показываем последний загруженный.
+              ctx.drawImage(lastFrame, 0, 0, surface.width, surface.height);
+            }
             if (index < INTRO_FRAMES - 1) {
               raf = requestAnimationFrame(tick);
             } else {
@@ -259,7 +268,12 @@ export function mapView() {
           };
           raf = requestAnimationFrame(tick);
           intro._introStop = () => { stopped = true; cancelAnimationFrame(raf); };
-        });
+        };
+        // Первый кадр показываем сразу; остальные догружаются в фоне.
+        images[0] = load(0);
+        if (images[0].complete && images[0].naturalWidth) startIntro();
+        else images[0].addEventListener("load", startIntro, { once: true });
+        for (let i = 1; i < INTRO_FRAMES; i += 1) load(i);
       }
     }
     if (!canvas || !tip) return () => { intro?._introStop?.(); window.clearTimeout(introTimer); };
