@@ -69,9 +69,8 @@ export const SUPABASE_ANON_KEY = "eyJ...";
    Brevo (300 писем/день) или Resend. Укажите host, port 587, логин, SMTP-ключ,
    sender email и сохраните.
 
-Также включите удаление аккаунта:
-**Authentication → Settings → Allow users to delete their account**,
-иначе кнопка удаления в настройках не сработает.
+Удаление своего аккаунта работает через RPC `delete_own_account` из
+`supabase/delete-own-account.sql`; отдельная настройка Supabase не нужна.
 
 ## 5. Как работает клиент
 

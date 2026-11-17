@@ -280,7 +280,7 @@ export async function deleteAccount() {
     const session = sb.readSession();
     if (!session?.access_token) return { ok: false, error: "Нет активной сессии." };
     try {
-      await sb.deleteUser(session.access_token);
+      await sb.deleteOwnAccount(session.access_token);
     } catch (error) {
       return { ok: false, error: humanAuthError(error.message) };
     }

@@ -124,8 +124,13 @@ export async function updatePassword(token, password) {
   });
 }
 
-export async function deleteUser(token) {
-  return request(`${BASE}/auth/v1/user`, { method: "DELETE", headers: headers(token) });
+export async function deleteOwnAccount(token) {
+  // RPC работает через Postgres SECURITY DEFINER и удаляет только auth.uid().
+  return request(`${BASE}/rest/v1/rpc/delete_own_account`, {
+    method: "POST",
+    headers: headers(token),
+    body: "{}",
+  });
 }
 
 export async function getProfile(token, id) {
