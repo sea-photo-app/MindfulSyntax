@@ -4,6 +4,7 @@
  */
 
 import { virtualRun } from "./virtual-run.js";
+import { setupPythonCache } from "./python-cache.js?v=20261118-py";
 
 const RUN_TIMEOUT = 15000;
 const INIT_TIMEOUT = 40000;
@@ -182,6 +183,7 @@ export async function runPython(code, options = {}) {
   }
 
   try {
+    await setupPythonCache();
     await ensureWorker();
   } catch (error) {
     const reason =
@@ -255,7 +257,7 @@ export function warmUp() {
   if (connection?.effectiveType && /2g/.test(connection.effectiveType)) return;
   warmStarted = true;
   const start = () => {
-    ensureWorker().catch(() => {
+    setupPythonCache().then(() => ensureWorker()).catch(() => {
       /* демо-режим включится сам */
     });
   };

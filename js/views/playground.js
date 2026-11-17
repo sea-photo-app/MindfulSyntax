@@ -2,7 +2,7 @@
  * Песочница: свободный Python в браузере.
  */
 
-import { createSandbox } from "../sandbox.js";
+import { createSandbox } from "../sandbox.js?v=20261118-py";
 import { icon, escapeHtml } from "../ui.js";
 import { getState } from "../state.js";
 

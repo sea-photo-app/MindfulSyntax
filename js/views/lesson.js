@@ -14,7 +14,7 @@ import {
   totalLessonCount,
 } from "../state.js";
 import { getLessonNeighbors, moduleLessons, moduleProgress } from "../data/modules.js";
-import { createSandbox } from "../sandbox.js";
+import { createSandbox } from "../sandbox.js?v=20261118-py";
 import { evaluateChecks, needsRun, allPassed } from "../checks.js";
 import { icon, escapeHtml, toast } from "../ui.js";
 import { highlightPython } from "../syntax.js";

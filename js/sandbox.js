@@ -3,7 +3,7 @@
  */
 
 import { CodeEditor } from "./editor.js";
-import { runPython, onRunnerStatus, warmUp, getRunnerStatus } from "./runner.js";
+import { runPython, onRunnerStatus, warmUp, getRunnerStatus } from "./runner.js?v=20261118-py";
 import { explainPythonError, extractLineNumber, errorName } from "./errors.js";
 import { addError, getState } from "./state.js";
 import { icon, escapeHtml, copyText } from "./ui.js";
@@ -94,6 +94,16 @@ export function createSandbox(options = {}) {
   details.hidden = !needsInputs(initialCode);
   if ((options.inputs || []).length && needsInputs(initialCode)) {
     details.open = true;
+  }
+
+  // Начинаем прогрев сразу, пока читатель листает теорию.
+  if (options.warm !== false) {
+    const scheduleWarm = () => warmUp();
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(scheduleWarm, { timeout: 1800 });
+    } else {
+      window.setTimeout(scheduleWarm, 700);
+    }
   }
 
   function readInputs() {

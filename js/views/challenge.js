@@ -4,7 +4,7 @@
  */
 
 import { getState, completeChallengeLevel, markChallengeDone } from "../state.js";
-import { createSandbox } from "../sandbox.js";
+import { createSandbox } from "../sandbox.js?v=20261118-py";
 import { icon, escapeHtml } from "../ui.js";
 import { playChime, playDrop } from "../audio.js";
 
