@@ -3093,3 +3093,17 @@ html.theme-changing[data-route="map"] .site-main {
   height: auto;
   display: block;
 }
+
+/* Compact map: make the night variant clearly different from the old brown paper. */
+[data-theme="night"] .mini-map.map-canvas {
+  border-color: rgba(176, 202, 174, 0.2);
+  background: #101b18;
+}
+[data-theme="night"] .mini-map.map-canvas .map-zone .zone-line,
+[data-theme="night"] .mini-map.map-canvas .map-zone text {
+  stroke: #c9d8bf;
+  fill: #c9d8bf;
+}
+[data-theme="night"] .mini-map.map-canvas .map-zone .zone-water {
+  stroke: rgba(127, 188, 178, 0.8);
+}
