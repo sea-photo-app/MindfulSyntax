@@ -3112,3 +3112,16 @@ html.theme-changing[data-route="map"] .site-main {
 [data-theme="night"] .mini-map.map-canvas .map-zone .zone-water {
   stroke: rgba(127, 188, 178, 0.8);
 }
+
+/* Module/lesson sidebar: one small wide map, not two stacked SVGs. */
+.mini-map svg.map-svg--tall {
+  display: none !important;
+}
+.mini-map svg.map-svg--wide {
+  display: block !important;
+  width: 100%;
+  height: auto;
+}
+.mini-map {
+  max-height: 190px;
+}
