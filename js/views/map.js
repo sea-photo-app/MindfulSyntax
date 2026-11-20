@@ -270,9 +270,19 @@ export function mapView() {
           intro._introStop = () => { stopped = true; cancelAnimationFrame(raf); };
         };
         // Первый кадр показываем сразу; остальные догружаются в фоне.
-        images[0] = load(0);
-        if (images[0].complete && images[0].naturalWidth) startIntro();
-        else images[0].addEventListener("load", startIntro, { once: true });
+        // Слушатель ставим ДО проверки complete, иначе на новом устройстве
+        // кадр успевает загрузиться между проверкой и подпиской — и интро висит.
+        const firstFrame = load(0);
+        const introFallback = window.setTimeout(() => {
+          if (!started && intro.isConnected) intro.remove();
+        }, 4500);
+        const startFromFirstFrame = () => {
+          window.clearTimeout(introFallback);
+          startIntro();
+        };
+        firstFrame.addEventListener("load", startFromFirstFrame, { once: true });
+        firstFrame.addEventListener("error", () => intro.remove(), { once: true });
+        if (firstFrame.complete && firstFrame.naturalWidth) startFromFirstFrame();
         for (let i = 1; i < INTRO_FRAMES; i += 1) load(i);
       }
     }
